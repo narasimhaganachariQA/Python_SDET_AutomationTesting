@@ -1,0 +1,47 @@
+#CONDITIONAL LOGIC(if.elif,else)
+#Eg:1
+# age=18
+# if(age>18):
+#     print("he can vote")
+# else:
+#     print("he can't vote")
+
+#Eg:2
+
+# Day=input("EnterDay").strip().lower()
+
+# if (Day=="monday"):
+#     print("its monday")
+
+# elif Day=="tuesday":
+#     print("ohh no!... its still tueday")
+
+# else:
+#     print("please enter day")
+
+#Nested if:
+
+#eg:3
+
+# age=int(input("Enter age ").strip())
+# citizen=input("enter citzen").strip().lower()
+
+# if age>=18:
+#     if citizen=="indian":
+#         print("your are indian and you are ready to vote")
+
+# else:
+#     print("your are not eligiable")
+
+
+age=18
+citizen ="indian"
+if age >=18 and citizen=="indian":
+    print("he can vote")
+
+# if age >=18 && citizen=="indian":
+#     print("he can vote")
+
+if age >=18 & citizen=="indian":
+    print("he can vote")
+
