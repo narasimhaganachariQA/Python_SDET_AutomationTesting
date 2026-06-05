@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 import time
 driver =webdriver.Chrome()
 driver.get("https://www.python.org")
-
+print(driver.title)
 
 assert "Python" in driver.title
 elem =driver.find_element(By.NAME,"q")

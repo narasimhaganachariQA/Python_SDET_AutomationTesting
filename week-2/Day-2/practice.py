@@ -1,37 +1,66 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+# Explicit wait imports
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 
 driver= webdriver.Chrome()
 driver.get("https://practicetestautomation.com/practice-test-login/")
-time.sleep(5)
+#time.sleep(5)
 driver.maximize_window()
 time.sleep(5)
-privacy_Polic_link=driver.find_element(By.LINK_TEXT, "Privacy Policy")
-link = privacy_Polic_link.get_attribute("href")
-print("Privacy Policy:",link)
-#time.sleep(15)
-#privacy_Polic_link.click
-#time.sleep(5)
-#driver.back()
-time.sleep(5)
-list_of_inputs=driver.find_elements(By.TAG_NAME,"input")
-print("number of input tages :", len(list_of_inputs))
-time.sleep(10)
+wait = WebDriverWait(driver, 10)
 #username_filed=driver.find_element(By.ID,"username")
-username_filed=driver.find_element(By.XPATH, "//*[@name='username']")
+username=wait.until(
+    EC.presence_of_element_located(
+        (By.ID, "username")
+    )
+)
 
-
-username_filed.send_keys("student")
-
-
-password_filed=driver.find_element(By.NAME,"password")
-password_filed.send_keys("Password123")
-login_button=driver.find_element(By.CSS_SELECTOR,"[name='btn']")
-print("clicked submit")
-
-login_button.click()
+username.send_keys("student")
 time.sleep(5)
+
+password_filed= wait.until(
+    EC.presence_of_element_located(
+        (By.ID, "password")
+    )
+)#driver.find_element(By.ID,"password")
+password_filed.send_keys("Password123")
+
+login_butn=wait.until(EC.presence_of_element_located((By.CLASS_NAME,"btn")))
+
+print("login button avaliable ")
+
+login_butn.click()
+print("login button clicked ")
+expectedValue=wait.until(EC.presence_of_element_located((By.CLASS_NAME,"post-title")))
+assert "Logged In Successfully" in expectedValue.text
+time.sleep(5)
+driver.get("https://practicetestautomation.com/practice-test-login/")
+username=wait.until(
+    EC.presence_of_element_located(
+        (By.ID, "username")
+    )
+)
+
+username.send_keys("student")
+time.sleep(5)
+
+password_filed= wait.until(
+    EC.presence_of_element_located(
+        (By.ID, "password")
+    )
+)#driver.find_element(By.ID,"password")
+password_filed.send_keys("Password")
+
+login_butn=wait.until(EC.presence_of_element_located((By.CLASS_NAME,"btn")))
+
+print("login button avaliable ")
+login_butn.click()
+invalid_login=wait.until(EC.presence_of_element_located((By.ID,"error")))
+print(invalid_login.text)
+assert "Your password is invalid!" in invalid_login.text
 
 driver.quit()

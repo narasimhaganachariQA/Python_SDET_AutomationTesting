@@ -1,0 +1,58 @@
+import requests
+
+# API URL
+url = "https://dummyjson.com/users/add"
+
+# Request Payload
+payload = {
+    # "title": "iPhone 15 Pro",
+    # "price": 1499,
+    # "category": "smartphones"
+    "firstName": "Emily",
+      "lastName": "Johnson",
+      "maidenName": "Smith",
+      "age": 29,
+      "gender": "female",
+      "email": "emily.johnson@x.dummyjson.com",
+      "phone": "+81 865-431-3024",
+      "username": "emilys",
+      "password": "emilyspass",
+      "birthDate": "1996-5-30",
+      "image": "https://dummyjson.com/icon/emilys/128",
+      "bloodGroup": "O-",
+      "height": 193.24,
+      "weight": 63.16,
+      "eyeColor": "Green",
+      "hair": {
+        "color": "Brown",
+        "type": "Curly"}
+}
+
+# Send POST request
+response = requests.post(url, json=payload)
+
+# Print Status Code
+print("Status Code:", response.status_code)
+
+# Print JSON Response
+data = response.json()
+
+# print("\nProduct Created Successfully")
+# print("----------------------------")
+# print("Product ID:", data["id"])
+# print("Title:", data["title"])
+# print("Price:", data["price"])
+# print("Category:", data["category"])
+
+print("\n User  Created Successfully")
+print("ID:", data["id"])
+print("firstName:", data["firstName"])
+print("lastName:", data["lastName"])
+print("birthDate:", data["birthDate"])
+
+
+# Validation
+if response.status_code == 201:
+    print("\nPOST API Test Passed")
+else:
+    print("\nPOST API Test Failed")
